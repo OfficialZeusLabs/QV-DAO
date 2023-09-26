@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
 interface QvInterface {
@@ -6,7 +6,7 @@ interface QvInterface {
    /**
      * @dev Name of the governor instance (used in building the ERC712 domain separator).
      */
-    function name() public view virtual returns (string memory);
+    function name()  view external  returns (string memory);
 
     /**
      * @notice module:core
@@ -17,7 +17,7 @@ interface QvInterface {
         uint256[] memory values,
         bytes[] memory calldatas,
         bytes32 descriptionHash
-    ) public pure virtual returns (uint256);
+    ) external pure  returns (uint256);
 
     /**
      * @notice module:reputation
@@ -26,13 +26,13 @@ interface QvInterface {
      * Note: this can be implemented in a number of ways, for example by reading the delegated balance from one (or
      * multiple), {ERC20Votes} tokens.
      */
-    function getVotes(address account, uint256 timepoint) public view virtual returns (uint256);
+    function getVotes(address account, uint256 timepoint) external view  returns (uint256);
 
     /**
      * @notice module:voting
      * @dev Returns whether `account` has cast a vote on `proposalId`.
      */
-    function hasVoted(uint256 proposalId, address account) public view virtual returns (bool);
+    function hasVoted(uint256 proposalId, address account) external view  returns (bool);
 
      /**
      * @dev Create a new proposal. Vote start after a delay specified by {IGovernor-votingDelay} and lasts for a
@@ -45,7 +45,7 @@ interface QvInterface {
         uint256[] memory values,
         bytes[] memory calldatas,
         string memory description
-    ) public virtual returns (uint256 proposalId);
+    ) external  returns (uint256 proposalId);
 
     /**
      * @dev Execute a successful proposal. This requires the quorum to be reached, the vote to be successful, and the
@@ -60,7 +60,7 @@ interface QvInterface {
         uint256[] memory values,
         bytes[] memory calldatas,
         bytes32 descriptionHash
-    ) public payable virtual returns (uint256 proposalId);
+    ) external payable  returns (uint256 proposalId);
 
     /**
      * @dev Cancel a proposal. A proposal is cancellable by the proposer, but only while it is Pending state, i.e.
@@ -73,14 +73,14 @@ interface QvInterface {
         uint256[] memory values,
         bytes[] memory calldatas,
         bytes32 descriptionHash
-    ) public virtual returns (uint256 proposalId);
+    ) external  returns (uint256 proposalId);
 
     /**
      * @dev Cast a vote
      *
      * Emits a {VoteCast} event.
      */
-    function castVote(uint256 proposalId, uint8 support) public virtual returns (uint256 balance);
+    function castVote(uint256 proposalId, uint8 support) external  returns (uint256 balance);
 
 
 
